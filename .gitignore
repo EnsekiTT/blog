@@ -1,6 +1,9 @@
 # Dataset
-data/*
-datas/*
+data/
+datas/
+*.pickle
+*.pkl
+*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
