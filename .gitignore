@@ -1,6 +1,8 @@
 # Dataset
 data/
 datas/
+results/
+result/
 *.pickle
 *.pkl
 *.csv
