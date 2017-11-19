@@ -3,6 +3,8 @@ data/
 datas/
 results/
 result/
+model/
+models/
 *.pickle
 *.pkl
 *.csv
