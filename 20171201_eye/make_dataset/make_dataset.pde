@@ -10,12 +10,15 @@ int count = 0;
 int cam_w, cam_h;
 int area_w = 210;
 int area_h = 210;
+int shot_frame = 60;
+int wait_frame = 30;
 int wait = 0;
 String hash = "";
+boolean pause = false;
 
 void setup() {
   fullScreen();
-  frameRate(5);
+  frameRate(10);
   String[] cams = Capture.list();
   cam = new Capture(this, cams[0]);
   cam.start();
@@ -37,13 +40,21 @@ void setup() {
 }
 
 void draw() {
+  if(pause){
+    fill(20);
+    rect(0, 0, width, height);
+    fill(200,0,0);
+    textSize(30);
+    text("Pause! Restart => S|s", width/2-100, height/2, 200, 100);
+    return; 
+  }
   fill(255);
   noStroke();
   rect(0, 0, width, height);
   fill(10);
   noStroke();
   ellipse(width/(row) * xp, height/(col) * yp, r, r);
-  if(count > 20){
+  if(count > shot_frame){
     count = 0;
     wait = 0;
     xp = xp + 1;
@@ -55,7 +66,7 @@ void draw() {
       }
     }
   }
-  if(wait < 15){
+  if(wait < wait_frame){
     wait = wait + 1;
     if(cam.available()){
       cam.read();
@@ -74,8 +85,16 @@ void draw() {
     String pos = xp + "_" + yp + "/";
     String path  = "/Users/ensekitt/dev/blog/20171201_eye/datas/" + pos + hash + '_' + count + ".jpg";
     println(path);
-    //img.save(path);
+    img.save(path);
     count++;
+  }
+}
+
+void keyPressed() {
+  if (key == 'P' || key == 'p') {
+    pause = true;
+  }  else if (key == 'S' || key == 's') {
+    pause = false;
   }
 }
 
