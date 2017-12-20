@@ -20,23 +20,27 @@ if __name__ == '__main__':
     # tracker = cv2.TrackerKCF_create()
 
     # TLD #GPUコンパイラのエラーが出ているっぽい
-    # tracker = cv2.TrackerTLD_create()
+    tracker = cv2.TrackerTLD_create()
 
     # MedianFlow
     # tracker = cv2.TrackerMedianFlow_create()
 
     # GOTURN # モデルが無いよって怒られた
     # https://github.com/opencv/opencv_contrib/issues/941#issuecomment-343384500
-    tracker = cv2.TrackerGOTURN_create()
+    # tracker = cv2.TrackerGOTURN_create()
 
     cap = cv2.VideoCapture(0)
 
-    ret, frame = cap.read()
-    frame = frame_resize(frame)
-    bbox = (0,0,10,10)
-    bbox = cv2.selectROI(frame, False)
-    ok = tracker.init(frame, bbox)
-    cv2.destroyAllWindows()
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            continue
+        frame = frame_resize(frame)
+        bbox = (0,0,10,10)
+        bbox = cv2.selectROI(frame, False)
+        ok = tracker.init(frame, bbox)
+        cv2.destroyAllWindows()
+        break
 
     while True:
         # VideoCaptureから1フレーム読み込む
