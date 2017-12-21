@@ -4,7 +4,7 @@ def frame_resize(frame, n=2):
     """
     スクリーンショットを撮りたい関係で1/4サイズに縮小
     """
-    return cv2.resize(frame, (int(frame.shape[1]/2), int(frame.shape[0]/2)))
+    return cv2.resize(frame, (int(frame.shape[1]/3), int(frame.shape[0]/3)))
 
 if __name__ == '__main__':
     """
@@ -17,10 +17,10 @@ if __name__ == '__main__':
     # tracker = cv2.TrackerMIL_create()
 
     # KCF
-    # tracker = cv2.TrackerKCF_create()
+    tracker = cv2.TrackerKCF_create()
 
-    # TLD #GPUコンパイラのエラーが出ているっぽい
-    tracker = cv2.TrackerTLD_create()
+    # TLD
+    # tracker = cv2.TrackerTLD_create()
 
     # MedianFlow
     # tracker = cv2.TrackerMedianFlow_create()
@@ -33,14 +33,13 @@ if __name__ == '__main__':
 
     while True:
         ret, frame = cap.read()
-        if not ret:
-            continue
-        frame = frame_resize(frame)
-        bbox = (0,0,10,10)
-        bbox = cv2.selectROI(frame, False)
-        ok = tracker.init(frame, bbox)
-        cv2.destroyAllWindows()
-        break
+        if ret:
+            break
+    frame = frame_resize(frame)
+    bbox = (0,0,10,10)
+    bbox = cv2.selectROI(frame, False)
+    ok = tracker.init(frame, bbox)
+    cv2.destroyAllWindows()
 
     while True:
         # VideoCaptureから1フレーム読み込む

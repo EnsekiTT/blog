@@ -8,6 +8,8 @@ models/
 *.pickle
 *.pkl
 *.csv
+*.prototxt
+*.caffemodel
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
