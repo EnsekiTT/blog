@@ -17,7 +17,7 @@ if __name__ == '__main__':
     # tracker = cv2.TrackerMIL_create()
 
     # KCF
-    tracker = cv2.TrackerKCF_create()
+    # tracker = cv2.TrackerKCF_create()
 
     # TLD
     # tracker = cv2.TrackerTLD_create()
@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     # GOTURN # モデルが無いよって怒られた
     # https://github.com/opencv/opencv_contrib/issues/941#issuecomment-343384500
-    # tracker = cv2.TrackerGOTURN_create()
+    tracker = cv2.TrackerGOTURN_create()
 
     cap = cv2.VideoCapture(0)
 
